@@ -9,6 +9,7 @@ import javax.swing.*;
 public class HelloPersonalized {
 
 	private JFrame frame; //ATRIBUTO FRAME SOBRE LA QUE SE EJECUTARAN LOS COMPONENTES
+	private JPanel panel;
 	
 	private final int ANCHO = 600; // DIMENSIONES POR DEFECTO DEL FRAME
 	private final int LARGO = 600;
@@ -20,6 +21,10 @@ public class HelloPersonalized {
 	public HelloPersonalized() {
 		this.frame = new JFrame("Hello");
 		this.frame.setLayout(new GridLayout(0,1));
+		this.panel = new JPanel();
+		this.panel.setLayout(null);
+		setPanel(panel);//SETTEA EL PANEL
+		
 		this.text = new JTextField("");
 		this.label = new JLabel("Indique un nombre para saludar ");
 		this.boton = new JButton("Say Hello");
@@ -33,10 +38,11 @@ public class HelloPersonalized {
 			}
 		});
 		
-		this.frame.add(label);
-		this.frame.add(text);
-		this.frame.add(boton);
+		this.panel.add(label);
+		this.panel.add(text);
+		this.panel.add(boton);
 		
+		showPanel();
 		showFrame();// LLAMA AL MÉTODO PARA QUE SEA VISIBLE
 	}
 	
@@ -49,6 +55,12 @@ public class HelloPersonalized {
 		this.frame.setSize(ANCHO, LARGO);
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//CIERRA EL FRAME
 		this.frame.setVisible(true);
+	}
+	
+	private void showPanel() {
+		this.panel.setSize(500, 500);
+		//this.panel.setDefaultCloseOperation(JPanel.EXIT_ON_CLOSE);//CIERRA EL FRAME
+		this.panel.setVisible(true);
 	}
 	
 	//MÉTODOS DE ACCESO
@@ -66,6 +78,14 @@ public class HelloPersonalized {
 	
 	public JTextField getText() {
 		return this.text;
+	}
+
+	public JPanel getPanel() {
+		return panel;
+	}
+
+	public void setPanel(JPanel panel) {
+		this.panel = panel;
 	}
 	
 }
