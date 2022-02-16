@@ -1,5 +1,6 @@
 package Ejercicio2.view;
 
+import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
@@ -23,15 +24,10 @@ import javax.swing.DefaultComboBoxModel;
 
 public class PeliculasLista extends JFrame {
 
-private static final long serialVersionUID = 1L;
-	
 	private JPanel contentPane;
 	private JTextField textField;
-	private JComboBox<Object> comboBox;
+	private JComboBox <Object> comboBox;
 
-	/**
-	 * Create the frame.
-	 */
 	public PeliculasLista() {
 		
 		setTitle("Películas");
@@ -96,16 +92,16 @@ private static final long serialVersionUID = 1L;
 		
 	}
 	
-	//MÉTODO QUE DEFINE EL ADHERIR EL OBKETO TEXTFIELD A LA LISTA
+	//MÉTODO QUE DEFINE EL ADHERIR EL OBJETO TEXTFIELD A LA LISTA
 	ActionListener addPeli = new ActionListener() {
 		
 		public void actionPerformed(ActionEvent e) {
 			
 			if (textField.getText().trim().length() > 0) {
-				comboBox.addItem(textField.getText().trim());
+				comboBox.addItem(textField.getText());
 				
 			}else {
-				JOptionPane.showMessageDialog(contentPane, "Indique el nombre de una Película");
+				JOptionPane.showMessageDialog(contentPane, "Indique  Película");
 			}
 			textField.setText(" ");	
 		}

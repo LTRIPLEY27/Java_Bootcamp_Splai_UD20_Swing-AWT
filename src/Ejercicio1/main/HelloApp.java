@@ -1,6 +1,6 @@
-package main;
+package Ejercicio1.main;
 
-import view.HelloPersonalized;
+import Ejercicio1.view.*;
 
 public class HelloApp {
 
