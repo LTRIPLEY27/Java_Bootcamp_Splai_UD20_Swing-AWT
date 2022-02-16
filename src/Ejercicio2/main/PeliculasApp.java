@@ -1,5 +1,8 @@
 package Ejercicio2.main;
-
+/*
+ * @uthor: Isabel Calzadilla
+ * UD20A : Ejercicio2 ALMACEN DE PELÍCULAS
+ * */
 import java.awt.EventQueue;
 
 import Ejercicio2.view.PeliculasLista;
