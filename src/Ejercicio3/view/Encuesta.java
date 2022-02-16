@@ -1,21 +1,11 @@
 package Ejercicio3.view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JList;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JRadioButton;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JSlider;
-import javax.swing.JTextPane;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 public class Encuesta extends JFrame {
 	private final int ANCHO = 400;
@@ -34,8 +24,10 @@ public class Encuesta extends JFrame {
 	private JSlider slider;
 	private JTextPane textPane;
 	private JButton btn;
+	private String respuesta;
 	
 	public Encuesta() {
+		respuesta = "Las opciones elegidas son : \n";
 		panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
@@ -49,15 +41,15 @@ public class Encuesta extends JFrame {
 		labelB.setBounds(22, 61, 174, 14);
 		panel.add(labelB);
 		
-		botonRadi1 = new JRadioButton("Windows");
+		botonRadi1 = new JRadioButton("Windows", false);
 		botonRadi1.setBounds(39, 99, 109, 23);
 		panel.add(botonRadi1);
 		
-		botonRadi2 = new JRadioButton("Linux");
+		botonRadi2 = new JRadioButton("Linux", false);
 		botonRadi2.setBounds(39, 124, 109, 23);
 		panel.add(botonRadi2);
 		
-		botonRadi3 = new JRadioButton("Mac");
+		botonRadi3 = new JRadioButton("Mac", false);
 		botonRadi3.setBounds(39, 150, 109, 23);
 		panel.add(botonRadi3);
 		
@@ -66,15 +58,15 @@ public class Encuesta extends JFrame {
 		labelC.setBounds(236, 61, 97, 14);
 		panel.add(labelC);
 		
-		chboxA = new JCheckBox("Programaci\u00F3n");
+		chboxA = new JCheckBox("Programaci\u00F3n", false);
 		chboxA.setBounds(224, 99, 97, 23);
 		panel.add(chboxA);
 		
-		chboxB = new JCheckBox("Dise\u00F1o Gr\u00E1fico");
+		chboxB = new JCheckBox("Dise\u00F1o Gr\u00E1fico", false);
 		chboxB.setBounds(224, 124, 97, 23);
 		panel.add(chboxB);
 		
-		chboxC = new JCheckBox("Administraci\u00F3n");
+		chboxC = new JCheckBox("Administraci\u00F3n", false);
 		chboxC.setBounds(224, 150, 97, 23);
 		panel.add(chboxC);
 		
@@ -85,15 +77,28 @@ public class Encuesta extends JFrame {
 		
 		slider = new JSlider();
 		slider.setMaximum(10);
+		slider.setValue(5);
+		slider.setPaintTicks(true);
+		slider.setPaintLabels(true);
+		slider.setMinorTickSpacing(1);
 		slider.setBounds(367, 91, 200, 26);
 		panel.add(slider);
 		
 		textPane = new JTextPane();
 		textPane.setBounds(89, 232, 446, 78);
+		JScrollPane scroll = new JScrollPane(textPane);
+		textPane.setBounds(89, 232, 446, 78);
 		panel.add(textPane);
-		
+		panel.add(scroll);
+		ButtonGroup grupo = new ButtonGroup();
+		grupo.add(botonRadi1);
+		grupo.add(botonRadi2);
+		grupo.add(botonRadi3);
 		btn = new JButton("Enviar");
 		btn.setBounds(244, 193, 89, 23);
+		
+		btn.addActionListener(compila);
+		
 		panel.add(btn);
 		
 		showPanel();
@@ -108,5 +113,33 @@ public class Encuesta extends JFrame {
 		setVisible(true);
 	}
 	
-	
+	ActionListener compila = new ActionListener() {
+		@Override
+		//EVALUACION DE LOS RADIOBUTTONS
+		public void actionPerformed(ActionEvent e) {
+			if(botonRadi1.isSelected()) {
+				respuesta += botonRadi1.getText();
+			} if(botonRadi2.isSelected()) {
+				respuesta += botonRadi2.getText();
+			} else {
+				respuesta += botonRadi3.getText();
+			}
+			
+			
+			respuesta += "\n";
+			// EVALUACION DEL CHECKBOX
+			
+			if(chboxA.isSelected()) {
+				respuesta += " " + chboxA.getText() + ", ";
+			} if(chboxB.isSelected()) {
+				respuesta += " "+ chboxB.getText() + ", ";
+			} if(chboxC.isSelected()) {
+				respuesta += " "+ chboxC.getText() + ", ";
+			}
+			
+			respuesta+= "\nHoras : "+ slider.getValue();
+			
+			textPane.setText(respuesta);
+		}
+	};
 }
